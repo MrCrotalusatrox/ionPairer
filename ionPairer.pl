@@ -271,6 +271,8 @@ foreach my $read_id (keys %global_reads_2_map) {
 
 # get the type of the read insert.  If unspecified by user, true_type = 9001 and will be assigned as below.
 if ($true_type == 9001) {
+	$true_type = 0;
+	
 	for my $i (0..2) {
 	    if($type_array[$i] > $type_array[$true_type]) {
  	      	$true_type = $i;
