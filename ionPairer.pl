@@ -79,6 +79,8 @@ my %global_con_2_len = ();         # contig integers versus lengths
 my %global_reads_2_map = ();       # reads vs mapping info
 my $global_minimum_links = overrideDefault(3, 'min_links'); # minimum number of links accepted during graph creation
 my $reference_fasta = $global_options->{'reference_fasta'};
+my $true_type = overrideDefault(9001, 'orientation'); #specified orientation of read pairs
+
 
 # get output file names and handles
 my ($file_root, undef, undef) = fileparse($global_options->{'bam1'});
@@ -267,14 +269,14 @@ foreach my $read_id (keys %global_reads_2_map) {
 #    }
 }
 
-# get the type of the read insert
-my $true_type = 0;
-for my $i (0..2) {
-    if($type_array[$i] > $type_array[$true_type]) {
-       $true_type = $i;
-    }
+# get the type of the read insert.  If unspecified by user, true_type = 9001 and will be assigned as below.
+if ($true_type == 9001) {
+	for my $i (0..2) {
+	    if($type_array[$i] > $type_array[$true_type]) {
+ 	      	$true_type = $i;
+	    }
+	}
 }
-
 # calculate the stdev on only the middle 80% of the sorted differences, otherwise it can be become very inflated. Can it still do this?
 @diffs = sort @diffs;
 my $length = scalar @diffs;
@@ -478,7 +480,7 @@ sub checkParams {
     #-----
     # Do any and all options checking here...
     #
-    my @standard_options = ("bam1|1:s", "bam2|2:s", "sam|s+", "reference_fasta|f:s", "working_dir|w:s", "help|h+", "max_insert|m:i", "min_links|l:i", "silent|t+");
+    my @standard_options = ("bam1|1:s", "bam2|2:s", "sam|s+", "reference_fasta|f:s", "working_dir|w:s", "help|h+", "max_insert|m:i", "min_links|l:i", "silent|t+", "orientation|o:i");
     my %options;
 
     # Add any other command line options, and the code to handle them
