@@ -705,6 +705,7 @@ __Script__Name__
     [-min_links -l]                      Minimum number of links to report in the dot file [default: 3]
     [-max_insert -m]                     Maximum insert size accepted [default: mean + 2 * std measured empirically (middle 80% paired reads)]
     [-silent -t]                         Suppress print statements
+    [-orientation -o]			 Specify expected orientation of reads based. 0 = MP illumina...fill in later :-)  
 
     Produces output files:
     
