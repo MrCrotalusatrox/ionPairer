@@ -79,7 +79,7 @@ my %global_con_2_len = ();         # contig integers versus lengths
 my %global_reads_2_map = ();       # reads vs mapping info
 my $global_minimum_links = overrideDefault(3, 'min_links'); # minimum number of links accepted during graph creation
 my $reference_fasta = $global_options->{'reference_fasta'};
-my $true_type = overrideDefault(9001, 'orientation'); #specified orientation of read pairs
+my $true_type = overrideDefault(9001, 'orientation'); #specified orientation of read pairs.  Why?  Because one never wants to see a read level over 9000...
 
 
 # get output file names and handles
